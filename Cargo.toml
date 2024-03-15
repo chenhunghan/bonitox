@@ -1,6 +1,6 @@
 [package]
 name = "bonitox"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Hung-Han Chen <chenhungh@gmail.com>"]
 description = "A library for parsing input/output of Bonito LLM"
