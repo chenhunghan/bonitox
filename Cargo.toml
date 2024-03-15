@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Hung-Han Chen <chenhungh@gmail.com>"]
 description = "A library for parsing input/output of Bonito LLM"
-license = "MIT"
 license-file = "LICENSE"
 repository = "https://github.com/chenhunghan/bonitox/"
 readme = "README.md"
@@ -20,7 +19,7 @@ path = "src/bin.rs"
 
 [dependencies]
 anyhow = "1.0.81"
-clap = { version = "4.5.2", features = ["derive"]}
+clap = { version = "4.5.2", features = ["derive"] }
 hf-hub = { version = "0.3.1", features = ["tokio"] }
 llama-cpp-2 = { version = "0.1.41", features = ["sampler"] } 
 tokio = { version = "1.32.0", features = ["full"] }
