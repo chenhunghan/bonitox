@@ -144,7 +144,6 @@ either reduce n_len or increase n_ctx"
 
             let new_token_id = tokens[0].id();
 
-            // end of stream
             if new_token_id == model.token_eos() {
                 break;
             }
