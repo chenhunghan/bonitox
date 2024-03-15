@@ -83,7 +83,7 @@ fn get_prompt_by_task_type(context: &str, task_prompt: &str) -> String {
 /// parse the bonito LLM generated completion and return the question in string
 /// only works with prompt with "exqa"/"multiple-choice question answering"
 /// None if no question found
-pub fn parse_q(completion: &str, context: &str) -> Option<String> {
+pub fn parse_q(completion: &str, test_chunk: &str) -> Option<String> {
     let pair: Vec<_> = completion.split("<|pipe|>").collect();
     // no <|pipe|> found, return None
     if pair.len() == 0 {
@@ -233,7 +233,7 @@ pub fn parse_q(completion: &str, context: &str) -> Option<String> {
         }
     }
 
-    // add the context if `Given the background: {{context}}`
+    // add the test_chunk if `Given the background: {{context}}`
     if after_task.contains("Given the background: {{context}}") {
         let pair: Vec<_> = after_task
             .split("Given the background: {{context}}")
@@ -241,7 +241,7 @@ pub fn parse_q(completion: &str, context: &str) -> Option<String> {
         let after_given_background = pair[1];
         let with_context = format!(
             "Given the background: {}\n{}",
-            context, after_given_background
+            test_chunk, after_given_background
         );
         let trimmed = with_context.trim().to_string();
         if trimmed.len() > 0 {
@@ -251,7 +251,7 @@ pub fn parse_q(completion: &str, context: &str) -> Option<String> {
 
     // add the context if `use this background: {{context}}`
     if after_task.contains("use this background: {{context}}") {
-        let after_task = after_task.replace("{{context}}", context);
+        let after_task = after_task.replace("{{context}}", test_chunk);
         let trimmed = after_task.trim().to_string();
         if trimmed.len() > 0 {
             return Some(trimmed);
